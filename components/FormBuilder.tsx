@@ -5,12 +5,16 @@ import React from "react";
 import PreviewDialogBtn from "./PreviewDialogBtn";
 import SaveFormBtn from "./SaveFormBtn";
 import PublishFormBtn from "./PublishFormBtn";
+import Designer from "./Designer";
+import { DndContext } from "@dnd-kit/core";
+import DragOverlayWrapper from "./DragOverlayWrapper";
 
 function FormBuilder({ form }: { form: Form }) {
   return (
-    <main className="flex flex-col w-full h-full">
-      <nav className="flex justify-between items-center border-b-2 border-muted p-4 gap-3">
-      <h2 className="truncate font-medium">
+    <DndContext>
+      <main className="flex flex-col w-full h-full">
+        <nav className="flex justify-between items-center border-b-2 border-muted p-4 gap-3">
+          <h2 className="truncate font-medium">
             <span className="text-muted-foreground mr-2">Form:</span>
             {form.name}
           </h2>
@@ -22,13 +26,18 @@ function FormBuilder({ form }: { form: Form }) {
                 <PublishFormBtn />
               </>
             )}
-            </div>
-      </nav>
-      <div className="flex w-full flex-grow items-center
-       justify-center relative overflow-y-auto h-[200px] 
-       bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-      </div>
-    </main>
+          </div>
+        </nav>
+        <div
+          className="flex w-full flex-grow items-center
+         justify-center relative overflow-y-auto h-[200px]
+         bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]"
+        >
+          <Designer />
+        </div>
+      </main>
+      <DragOverlayWrapper />
+    </DndContext>
   );
 }
 
